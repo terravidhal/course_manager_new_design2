@@ -1,0 +1,68 @@
+.DetailsPageCourse {
+  background-color: var(--white);
+  height: 100vh;
+}
+.DetailsPageCourse .page-top h1 {
+  color: var(--color-theme);
+}
+.DetailsPageCourse .page-content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.DetailsPageCourse .details-img {
+  flex: 1;
+  border-radius: 5px;
+}
+.DetailsPageCourse .details-img img {
+  width: 400px;
+  border-radius: 5px;
+}
+.DetailsPageCourse .fields {
+  flex: 3;
+  border-radius: 5px;
+}
+.DetailsPageCourse .fields p span.infos {
+  color: var(--color-theme);
+  margin-right: 10px;
+}
+.DetailsPageCourse .page-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  padding-top: 10px;
+}
+.DetailsPageCourse h4 {
+  color: gray;
+}
+.DetailsPageCourse .page-content {
+  padding: 20px 0;
+  margin: 0px auto;
+  padding-bottom: 40px;
+  width: 70%;
+}
+.DetailsPageCourse span.infos {
+  font-weight: bold;
+}
+.DetailsPageCourse .page-top a {
+  font-size: 1.5rem;
+  color: var(--oranges);
+  font-weight: bold;
+}
+
+@media (max-width: 991px) {
+  .DetailsPageCourse .page-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  .DetailsPageCourse .page-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .DetailsPageCourse .details-img img {
+    width: 200px;
+    border-radius: 5px;
+  }
+}

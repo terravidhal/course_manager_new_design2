@@ -1,0 +1,68 @@
+.InstructorByCourse {
+  background-color: var(--white);
+  height: 100vh;
+}
+.InstructorByCourse .page-top h1 {
+  color: var(--color-theme);
+}
+.InstructorByCourse .page-content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.InstructorByCourse .details-img {
+  flex: 1;
+  border-radius: 5px;
+}
+.InstructorByCourse .details-img img {
+  width: 400px;
+  border-radius: 5px;
+}
+.InstructorByCourse .fields {
+  flex: 3;
+  border-radius: 5px;
+}
+.InstructorByCourse .fields p span.infos {
+  color: var(--color-theme);
+  margin-right: 10px;
+}
+.InstructorByCourse .page-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  padding-top: 10px;
+}
+.InstructorByCourse h4 {
+  color: gray;
+}
+.InstructorByCourse .page-content {
+  padding: 20px 0;
+  margin: 0px auto;
+  padding-bottom: 40px;
+  width: 70%;
+}
+.InstructorByCourse span.infos {
+  font-weight: bold;
+}
+.InstructorByCourse .page-top a {
+  font-size: 1.5rem;
+  color: var(--oranges);
+  font-weight: bold;
+}
+
+@media (max-width: 991px) {
+  .InstructorByCourse .page-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  .InstructorByCourse .page-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .InstructorByCourse .details-img img {
+    width: 200px;
+    border-radius: 5px;
+  }
+}
