@@ -43,15 +43,25 @@ const RegisterAdmin = (props)=>{
         })
         setConfirmReg("Thank you for registering, you can now log in");
         setErrs({});
-        navigate("/route/log/loaded25");
+        navigate("/login_page");
       })
       .catch((err)=>{
-       // console.log(err);
+        console.log(err);
        // setErrs(err.response.data.errors.errors);
-        setErrs2(err.response.data.message)
-        console.log("+++++++++",err.response.data.message);
+        setErrs2(err.response.data.errors.message)
+       // setErrs2(err.response.data.message)
+       // console.log("+++++++++",err.response.data.message);
       })
   };
+
+  // show/hiden value input password
+  const toggleInputType = (ev) =>{
+      ev.target.classList.toggle('fa-eye');
+      const input = ev.target.parentNode.children[1];
+    //  console.log(input);
+      input.type === "password" ? input.type = "text" : input.type = "password";
+  }
+   
   
   return(
     <div  className="RegisterAdmin" style={{
@@ -74,12 +84,12 @@ const RegisterAdmin = (props)=>{
         <h1 style={{color: "grey"}}>{confirmReg}</h1>
         :null
       }
-      {
-        errs2?
-        <span className="error-text">{errs2}</span>
-        :null
-      }
       <form onSubmit={register}>
+        {
+          errs2?
+          <span className="error-text">{errs2}</span>
+          :null
+        }
         <div className="field">
           <label>name</label>
           {
@@ -102,7 +112,7 @@ const RegisterAdmin = (props)=>{
           <label>Key Code</label>
           <input type="password" name="keyCode" value={user.keyCode} onChange={(e)=> handleChange(e)}/>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Password</label>
           {
             errs.password?
@@ -110,8 +120,9 @@ const RegisterAdmin = (props)=>{
             :null
           }
           <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Confirm Password</label>
           {
             errs.confirmPassword?
@@ -119,6 +130,7 @@ const RegisterAdmin = (props)=>{
             :null
           }
           <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
         <button type="submit">Register Me</button>
       </form>

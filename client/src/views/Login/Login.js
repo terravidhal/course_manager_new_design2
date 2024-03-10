@@ -59,6 +59,15 @@ const Login = (props)=>{
   };
 
 
+  // show/hiden value input password
+  const toggleInputType = (ev) =>{
+    ev.target.classList.toggle('fa-eye');
+    const input = ev.target.parentNode.children[1];
+  //  console.log(input);
+    input.type === "password" ? input.type = "text" : input.type = "password";
+  }
+
+
   
   return(
     <div className="Login" style={{
@@ -85,9 +94,10 @@ const Login = (props)=>{
           <label>Email</label>
           <input type="text" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Password</label>
           <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
         <button type="submit">Sign in</button>
         <p className="suggest">you have not account ?&nbsp; 

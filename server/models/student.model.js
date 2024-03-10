@@ -20,10 +20,10 @@ const StudentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Error: password is required"],
       validate: {
-        validator: function(val) {
-          return /^(?=.*[A-Z])(?=.{4,})/.test(val);
+        validator: function(value) {
+          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value);
         },
-        message: "Error: password must contain at least one uppercase letter and be at least 4 characters long",
+        message: "Error: password must contain at least one lowercase letter, one uppercase letter, one number and one special character, and be at least 8 characters long",
       },
     },
     role: {

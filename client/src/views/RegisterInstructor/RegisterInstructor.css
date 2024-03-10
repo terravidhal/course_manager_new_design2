@@ -113,6 +113,16 @@
   cursor: not-allowed;
 }
 
+.RegisterInstructor .relative {
+  position: relative;
+}
+.RegisterInstructor .absolute {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  cursor: pointer;
+}
+
 @media (max-width: 991px) {
   .RegisterInstructor form {
     flex-direction: column;

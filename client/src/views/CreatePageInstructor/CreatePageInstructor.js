@@ -49,6 +49,14 @@ const CreatePageInstructor = (props)=>{
         setErrs(err.response.data.errors.errors);
       })
   };
+
+  // show/hiden value input password
+  const toggleInputType = (ev) =>{
+    ev.target.classList.toggle('fa-eye');
+    const input = ev.target.parentNode.children[1];
+  //  console.log(input);
+    input.type === "password" ? input.type = "text" : input.type = "password";
+  }
   
   return(
     <div className="CreatePageInstructor">
@@ -94,7 +102,7 @@ const CreatePageInstructor = (props)=>{
                <option value="true">true</option>
           </select>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Password</label>
           {
             errs.password?
@@ -102,8 +110,9 @@ const CreatePageInstructor = (props)=>{
             :null
           }
           <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Confirm Password</label>
           {
             errs.confirmPassword?
@@ -111,6 +120,7 @@ const CreatePageInstructor = (props)=>{
             :null
           }
           <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
         <button type="submit">create</button>
       </form>

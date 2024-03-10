@@ -58,6 +58,16 @@ const RegisterInstructor = (props)=>{
         console.log("+++++++++",err);
       })
     };
+
+
+    // show/hiden value input password
+    const toggleInputType = (ev) =>{
+      ev.target.classList.toggle('fa-eye');
+      const input = ev.target.parentNode.children[1];
+    //  console.log(input);
+      input.type === "password" ? input.type = "text" : input.type = "password";
+    }
+
   
   return(
     <div className="RegisterInstructor" style={{
@@ -102,7 +112,7 @@ const RegisterInstructor = (props)=>{
           }
           <input type="email" name="email" value={user.email} onChange={(e)=> handleChange(e)}/>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Password</label>
           {
             errs.password?
@@ -110,8 +120,9 @@ const RegisterInstructor = (props)=>{
             :null
           }
           <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
-        <div className="field">
+        <div className="field relative">
           <label>Confirm Password</label>
           {
             errs.confirmPassword?
@@ -119,6 +130,7 @@ const RegisterInstructor = (props)=>{
             :null
           }
           <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
+          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
         </div>
         <button type="submit">Register Me</button>
         <p className="suggest">Already have an account ?&nbsp; 

@@ -105,6 +105,16 @@
   cursor: not-allowed;
 }
 
+.CreatePageInstructor .relative {
+  position: relative;
+}
+.CreatePageInstructor .absolute {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  cursor: pointer;
+}
+
 @media (max-width: 991px) {
   .CreatePageInstructor form {
     flex-direction: column;

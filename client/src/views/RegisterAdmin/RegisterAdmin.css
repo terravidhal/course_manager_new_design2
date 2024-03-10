@@ -118,6 +118,15 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+.RegisterAdmin .relative {
+  position: relative;
+}
+.RegisterAdmin .absolute {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  cursor: pointer;
+}
 
 @media (max-width: 991px) {
   .RegisterAdmin form {

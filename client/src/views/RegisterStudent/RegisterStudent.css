@@ -119,6 +119,16 @@
   cursor: not-allowed;
 }
 
+.RegisterStudent .relative {
+  position: relative;
+}
+.RegisterStudent .absolute {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  cursor: pointer;
+}
+
 @media (max-width: 991px) {
   .RegisterStudent form {
     flex-direction: column;
