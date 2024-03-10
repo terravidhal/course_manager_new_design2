@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const InstructorModel = require("../models/instructor.model");
-const UserModel = require("../models/user.model");
+const AdminModel = require("../models/admin.model");
 const {
   main,
   sendNewInstructorNotification,
@@ -122,31 +122,11 @@ module.exports = {
       });
   },
 
-  findOneSingleInstructorOrUser: async (req, res) => {
-    const { id } = req.params;
-    const entityType = req.params.entityType;
-
-    const models = {
-      instructor: InstructorModel,
-      user: UserModel,
-    };
-
-    const model = models[entityType];
-    if (!model) return res.status(400).json({ error: "Invalid entity type" });
-
-    try {
-      const entity = await model.findOne({ _id: id });
-      if (!entity) return res.status(404).json({ error: "Entity not found" });
-      res.json({ entity });
-    } catch (err) {
-      res.status(400).json({ error: err.message });
-    }
-  },
 
   findSingleEntityInstructorOrAdmin: async (req, res) => {
     const { id } = req.params;
     const instructor = await InstructorModel.findOne({ _id: id });
-    const user = await UserModel.findOne({ _id: id });
+    const admin = await AdminModel.findOne({ _id: id });
 
     if (instructor) {
       try {
@@ -156,10 +136,10 @@ module.exports = {
       } catch (err) {
         return res.status(400).json({ error: err.message });
       }
-    } else if (user) {
+    } else if (admin) {
       try {
-        if (!user) return res.status(404).json({ error: "User not found" });
-        return res.json({ result: user });
+        if (!admin) return res.status(404).json({ error: "Admin not found" });
+        return res.json({ result: admin });
       } catch (err) {
         return res.status(400).json({ error: err.message });
       }
@@ -178,31 +158,4 @@ module.exports = {
       });
   },
 
-  findInstructorsByManyId: (req, res) => {
-    const { ids } = req.params.id;
-
-    if (!ids || ids.length === 0) {
-      return res.status(400).json({ message: "Liste d'IDs vide." });
-    }
-
-    InstructorModel.find({ _id: { $in: ids } })
-      .then((instructors) => {
-        if (!instructors || instructors.length === 0) {
-          return res.status(404).json({ message: "Aucun utilisateur trouvé." });
-        }
-
-        res.json({ instructors });
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  },
-
-  deleteAllInstructors: (req, res) => {
-    InstructorModel.deleteMany({})
-      .then((result) => res.status(200).json({ result }))
-      .catch((err) =>
-        res.status(400).json({ message: "Something went wrong", error: err })
-      );
-  },
 };

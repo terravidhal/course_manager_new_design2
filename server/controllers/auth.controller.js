@@ -5,7 +5,7 @@ const StudentModel = require("../models/student.model");
 
 const InstructorModel = require("../models/instructor.model");
 
-const AdminModel = require("../models/user.model");
+const AdminModel = require("../models/admin.model");
 
 module.exports = {
   login: async (req, res) => {

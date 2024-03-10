@@ -44,12 +44,10 @@ module.exports = {
     newStudent
       .save()
       .then((newStudent) => {
-        res
-          .status(201)
-          .json({
-            message: "Student successfully created",
-            student: newStudent,
-          });
+        res.status(201).json({
+          message: "Student successfully created",
+          student: newStudent,
+        });
       })
       .catch((err) => {
         if (err.name === "ValidationError") {
@@ -79,12 +77,10 @@ module.exports = {
         if (!updatedStudent) {
           return res.status(404).json({ message: "Étudiant introuvable" });
         }
-        res
-          .status(200)
-          .json({
-            message: "Étudiant mis à jour avec succès",
-            student: updatedStudent,
-          });
+        res.status(200).json({
+          message: "Étudiant mis à jour avec succès",
+          student: updatedStudent,
+        });
       })
       .catch((err) => {
         if (err.name === "ValidationError") {
@@ -111,26 +107,6 @@ module.exports = {
       .then((oneSingleStudent) => {
         console.log("oneSingleStudent", oneSingleStudent);
         res.json({ oneSingleStudent });
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  },
-
-  findStudentsByManyId: (req, res) => {
-    const { ids } = req.params.id;
-
-    if (!ids || ids.length === 0) {
-      return res.status(400).json({ message: "Liste d'IDs vide." });
-    }
-
-    StudentModel.find({ _id: { $in: ids } })
-      .then((students) => {
-        if (!students || students.length === 0) {
-          return res.status(404).json({ message: "Aucun utilisateur trouvé." });
-        }
-
-        res.json({ students });
       })
       .catch((err) => {
         res.status(400).json(err);

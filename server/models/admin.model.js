@@ -19,6 +19,12 @@ const AdminSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Error: password is required"],
+      validate: {
+        validator: function(val) {
+          return /^(?=.*[A-Z])(?=.{4,})/.test(val);
+        },
+        message: "Error: password must contain at least one uppercase letter and be at least 4 characters long",
+      },
     },
     role: {
       type: String,
