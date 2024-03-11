@@ -131,25 +131,30 @@ const RegisterStudent = (props)=>{
           </div>
         </div>
         <div className="super-fields">
-          <div className="field relative">
+          <div className="field">
           <label>Password</label>
           {
             errs.password?
             <span className="error-text">{errs.password.message}</span>
             :null
           }
-          <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
-          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          <div className="input-icon relative">
+            <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
+            <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
           </div>
-        <div className="field relative">
+          <span className="infos-pwd">password must contain at least one lowercase letter, one uppercase letter, one number and one special character, and be at least 8 characters long</span>
+          </div>
+        <div className="field">
           <label>Confirm Password</label>
           {
             errs.confirmPassword?
             <span className="error-text">{errs.confirmPassword.message}</span>
             :null
           }
-          <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
-          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          <div className="input-icon relative">
+            <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
+            <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          </div>
         </div>
         </div>
         <button type="submit">Register Me</button>

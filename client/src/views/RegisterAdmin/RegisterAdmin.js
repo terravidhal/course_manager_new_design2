@@ -47,9 +47,8 @@ const RegisterAdmin = (props)=>{
       })
       .catch((err)=>{
         console.log(err);
-       // setErrs(err.response.data.errors.errors);
-        setErrs2(err.response.data.errors.message)
-       // setErrs2(err.response.data.message)
+        setErrs(err.response.data.errors.errors || {});
+        setErrs2(err.response.data.message)
        // console.log("+++++++++",err.response.data.message);
       })
   };
@@ -57,8 +56,8 @@ const RegisterAdmin = (props)=>{
   // show/hiden value input password
   const toggleInputType = (ev) =>{
       ev.target.classList.toggle('fa-eye');
-      const input = ev.target.parentNode.children[1];
-    //  console.log(input);
+      const input = ev.target.parentNode.children[0];
+      console.log(input);
       input.type === "password" ? input.type = "text" : input.type = "password";
   }
    
@@ -112,25 +111,30 @@ const RegisterAdmin = (props)=>{
           <label>Key Code</label>
           <input type="password" name="keyCode" value={user.keyCode} onChange={(e)=> handleChange(e)}/>
         </div>
-        <div className="field relative">
+        <div className="field">
           <label>Password</label>
           {
             errs.password?
             <span className="error-text">{errs.password.message}</span>
             :null
           }
-          <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
-          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          <div className="input-icon relative">
+            <input type="password" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
+            <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          </div>
+          <span className="infos-pwd">password must contain at least one lowercase letter, one uppercase letter, one number and one special character, and be at least 8 characters long</span>
         </div>
-        <div className="field relative">
+        <div className="field">
           <label>Confirm Password</label>
           {
             errs.confirmPassword?
             <span className="error-text">{errs.confirmPassword.message}</span>
             :null
           }
-          <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
-          <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          <div className="input-icon relative">
+            <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
+            <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye-slash  absolute"></i>
+          </div>
         </div>
         <button type="submit">Register Me</button>
       </form>

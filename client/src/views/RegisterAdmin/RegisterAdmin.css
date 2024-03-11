@@ -124,8 +124,13 @@
 .RegisterAdmin .absolute {
   position: absolute;
   right: 10px;
-  top: 30px;
+  top: 13px;
   cursor: pointer;
+}
+.RegisterAdmin .infos-pwd {
+  font-size: 0.8rem;
+  color: gray;
+  font-style: italic;
 }
 
 @media (max-width: 991px) {

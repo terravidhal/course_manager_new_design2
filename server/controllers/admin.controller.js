@@ -4,7 +4,7 @@ const AdminModel = require("../models/admin.model");
 module.exports = {
   register: (req, res) => {
     if (req.body.keyCode !== process.env.KEY_CODE) {
-      return res.status(400).json({ message: "Invalid keycode" });
+      return res.status(400).json({ message: "Invalid keycode", errors: "Invalid keycode" });
     }
 
     const { keycode, ...adminData } = req.body;
