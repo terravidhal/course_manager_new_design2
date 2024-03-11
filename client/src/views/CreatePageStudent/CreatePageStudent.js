@@ -57,7 +57,7 @@ const CreatePageStudent = (props)=>{
   // show/hiden value input password
   const toggleInputType = (ev) =>{
     ev.target.classList.toggle('fa-eye');
-    const input = ev.target.parentNode.children[1];
+    const input = ev.target.parentNode.children[0];
   //  console.log(input);
     input.type === "password" ? input.type = "text" : input.type = "password";
   }
