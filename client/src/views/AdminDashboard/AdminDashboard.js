@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
 
-  // check and update courses status5
+  // check and update courses status
   useEffect(() => {
     const GetAllCourses = async () => {
       try {
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
     axios
       .get("http://localhost:8000/api/instructors", { withCredentials: true })
       .then((res) => {
-        setAllInstructors(res.data);
+        setAllInstructors(res.data || []);
         console.log("r+++++++", res.data);
       })
       .catch((err) => console.log(err));

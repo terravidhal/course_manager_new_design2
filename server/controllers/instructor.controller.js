@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const InstructorModel = require("../models/instructor.model");
 const AdminModel = require("../models/admin.model");
 const {
-  main,
   sendNewInstructorNotification,
 } = require("../notifications/notifications");
 

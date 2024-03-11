@@ -9,7 +9,7 @@ const AdminModel = require("../models/admin.model");
 module.exports = {
   authenticate: (req, res, next) => {
     jwt.verify(
-      req.cookies.admintoken,
+      req.cookies.usertoken,
       process.env.JWT_SECRET,
       async (err, decodedToken) => {
         const admin = await AdminModel.findOne({ _id: decodedToken._id });
