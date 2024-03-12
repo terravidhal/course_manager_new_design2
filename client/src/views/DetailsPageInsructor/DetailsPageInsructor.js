@@ -34,7 +34,7 @@ const DetailsPageInsructor = () => {
       </div>  
       <div className="page-content">
       <div className="details-img">
-          <img src="/assets/images/OIG1.jfif" alt="" />
+          <img src="/assets/images/instruct.jfif" alt="" />
         </div>
         <div className="fields">
             <p><span className='infos'>name:</span>{OneInstructor.name}</p>

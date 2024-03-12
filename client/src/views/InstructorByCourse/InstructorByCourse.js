@@ -59,7 +59,7 @@ const InstructorByCourse = () => {
           { loaded === true ? 
           <>
           <div className="details-img">
-          <img src="/assets/images/OIG1.jfif" alt="" />
+          <img src="/assets/images/instruct.jfif" alt="" />
          </div>
           <div className="fields">
                <p><span className='infos'>name:</span>&nbsp;{InstructByCourse.name}</p>

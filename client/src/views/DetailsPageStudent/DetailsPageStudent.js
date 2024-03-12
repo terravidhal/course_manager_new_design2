@@ -35,7 +35,7 @@ const DetailsPageStudent = () => {
       </div>  
       <div className="page-content">
       <div className="details-img">
-          <img src="/assets/images/OIG1.jfif" alt="" />
+          <img src="/assets/images/student2.jfif" alt="" />
         </div>
         <div className="fields">
             <p><span className='infos'>name:</span>{OneStudent.name}</p>
