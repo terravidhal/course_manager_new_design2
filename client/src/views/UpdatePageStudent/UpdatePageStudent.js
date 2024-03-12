@@ -77,6 +77,16 @@ const UpdatePageStudent = (props) => {
       });
   };
 
+
+  // show/hiden value input password
+  const toggleInputType = (ev) =>{
+    ev.target.classList.toggle('fa-eye-slash');
+    ev.target.classList.toggle('fa-eye');
+    const input = ev.target.parentNode.children[0];
+  //  console.log(input);
+    input.type === "password" ? input.type = "text" : input.type = "password";
+  }
+
   return (
     <div className="UpdatePageStudent">
       <div className="page-top">
@@ -147,24 +157,31 @@ const UpdatePageStudent = (props) => {
             {errs.password ? (
               <span className="error-text">{errs.password.message}</span>
             ) : null}
-            <input
-              type="text"
-              name="password"
-              value={user.password}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="input-icon relative">
+              <input
+                type="text"
+                name="password"
+                value={user.password}
+                onChange={(e) => handleChange(e)}
+              />
+              <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye  absolute"></i>
+            </div>
+            <span className="infos-pwd">password must contain at least one lowercase letter, one uppercase letter, one number and one special character, and be at least 8 characters long</span>
           </div>
           <div className="field">
             <label>Confirm Password</label>
             {errs.confirmPassword ? (
               <span className="error-text">{errs.confirmPassword.message}</span>
             ) : null}
-            <input
-              type="text"
-              name="confirmPassword"
-              value={user.confirmPassword}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="input-icon relative">
+              <input
+                type="text"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                onChange={(e) => handleChange(e)}
+              />
+              <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye  absolute"></i>
+            </div>
           </div>
           <button type="submit">Update</button>
         </form>

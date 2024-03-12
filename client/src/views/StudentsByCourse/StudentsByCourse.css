@@ -9,13 +9,14 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
 }
 .StudentsByCourse .details-img {
   flex: 1;
   border-radius: 5px;
 }
 .StudentsByCourse .details-img img {
-  width: 400px;
+  width: 200px;
   border-radius: 5px;
 }
 .StudentsByCourse .fields {

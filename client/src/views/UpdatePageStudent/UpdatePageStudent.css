@@ -90,6 +90,7 @@
   color: white;
   font-size: 1rem;
   border-radius: 5px;
+  cursor: pointer;
 }
 .UpdatePageStudent .validate_form {
   display: flex;
@@ -107,6 +108,20 @@
   color: white;
   opacity: 0.5;
   cursor: not-allowed;
+}
+.UpdatePageStudent .relative {
+  position: relative;
+}
+.UpdatePageStudent .absolute {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  cursor: pointer;
+}
+.UpdatePageStudent .infos-pwd {
+  font-size: 0.8rem;
+  color: gray;
+  font-style: italic;
 }
 
 @media (max-width: 991px) {

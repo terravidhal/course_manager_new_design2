@@ -64,8 +64,14 @@ const DetailsPageCourse = () => {
             <p><span className='infos'>description:</span> {OneCourse.description}</p>
             <p><span className='infos'>dayOfWeek:</span> {OneCourse.dayOfWeek}</p>
             <p><span className='infos'>type Of Course:</span> {OneCourse.typeOfCourse}</p>
-            <p><span className='infos'>link Meeting:</span> {OneCourse.linkMeeting}</p>
-            <p><span className='infos'>documents Link:</span> {OneCourse.documentsLink}</p>
+            <p>
+              <span className='infos'>link Meeting:</span>
+              <a href={OneCourse.linkMeeting} target='_blank'>{OneCourse.linkMeeting}</a>
+            </p>
+            <p>
+              <span className='infos'>documents Link:</span>
+              <a href={OneCourse.documentsLink} target='_blank'>{OneCourse.documentsLink}</a>
+            </p>
             <p><span className='infos'>start Time:</span> {OneCourse.startTime}</p>
             <p><span className='infos'>end Time:</span> {OneCourse.endTime}</p>
             <p><span className='infos'>duration:</span> {OneCourse.duration} minutes</p>
