@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import './UpdatePageInstructorPassword.css';
 
@@ -9,14 +9,10 @@ const UpdatePageInstructorPassword = (props)=>{
 
     const [confirmReg, setConfirmReg] = useState("");
     const [errs2, setErrs2] = useState('');
-    const [loaded, setLoaded] = useState(false); 
     const [user, setUser] = useState({
       id: id,
-      name: "",
-      email: "",
-      isInstructor: "false",
-      password: "",
-      confirmPassword:""
+      password: "default",
+      confirmPassword:"default"
     });
    
   
@@ -27,27 +23,6 @@ const UpdatePageInstructorPassword = (props)=>{
       })
     }
     
-
-  //  get  data one specific instructor
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/instructors/" + id,{withCredentials: true})
-      .then((res) => {
-        console.log("u++++++++++",res.data.oneSingleInstructor);
-        setUser({
-           id: id,
-           name: res.data.oneSingleInstructor.name,
-           email: res.data.oneSingleInstructor.email,
-           isInstructor: res.data.oneSingleInstructor.isInstructor,
-          password: "default",
-          confirmPassword: "default"
-        });
-        setLoaded(true); 
-      })
-      .catch((err) => console.log(err));
-      
-    }, [id]); 
-
 
     const updateInstructor = (e) =>{
       e.preventDefault();
@@ -71,7 +46,7 @@ const UpdatePageInstructorPassword = (props)=>{
         setErrs2(err.response.data.message);
         console.log("+++++++++",err.response.data.message);
       })
-    };
+    };  
 
    
 
@@ -98,7 +73,6 @@ const UpdatePageInstructorPassword = (props)=>{
         <span className="error-text">{errs2}</span>
         :null
       }
-      {loaded === true ? 
       <form onSubmit={updateInstructor}>
         <div className="field">
           <label>Password</label>
@@ -116,7 +90,7 @@ const UpdatePageInstructorPassword = (props)=>{
           </div>
         </div>
         <button type="submit">Update</button>
-      </form>  : null }
+      </form>  
     </div>
   );
   };

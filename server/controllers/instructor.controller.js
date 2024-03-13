@@ -127,9 +127,9 @@ module.exports = {
     InstructorModel.findOneAndUpdate(
       { _id: id },
       {
-        name: name,
-        email: email,
-        isInstructor: isInstructor,
+      //  name: name,
+      //  email: email,
+       // isInstructor: isInstructor,
         password: await bcrypt.hash(password, 10),
       },
       { new: true, runValidators: true }
