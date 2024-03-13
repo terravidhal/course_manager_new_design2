@@ -72,6 +72,60 @@ module.exports = {
     const { id, name, email, isInstructor, password } = req.body;
 
     InstructorModel.findOneAndUpdate(
+      { _id: id },
+      {
+        name: name,
+        email: email,
+        isInstructor: isInstructor,
+      //  password: await bcrypt.hash(password, 10),
+      },
+      { new: true, runValidators: true }
+    )
+      .then((updatedInstructor) => {
+        if (!updatedInstructor) {
+          return res.status(404).json({ message: "instructeur introuvable" });
+        }
+        res.status(200).json({
+          message: "instructeur mis à jour avec succès",
+          instructor: updatedInstructor,
+        });
+      })
+      .catch((err) => {
+        if (err.name === "ValidationError") {
+          return res
+            .status(400)
+            .json({ message: "Validation Errors", errors: err });
+        }
+        res
+          .status(400)
+          .json({ message: "Une erreur s'est produite", errors: err });
+      });
+  },
+
+
+
+  updateExistingInstructorPassword: async (req, res) => {
+    const { id, name, email, isInstructor, password, confirmPassword } = req.body;
+
+    // Check if password update is requested
+    if (password) {
+      // Validate and hash the new password
+      const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(password);
+      if (!passwordValidation) {
+        return res.status(400).json({
+          message: "Error: password must contain at least one lowercase letter, one uppercase letter, one number and one special character, and be at least 8 characters long",
+        });
+      }
+    }
+    else{
+      return res.status(400).json({ message: "passwords doesn't exists." });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Error: passwords didn't match. Please try again.", p:password, cp:confirmPassword });
+    }
+
+    InstructorModel.findOneAndUpdate(
       { _id: req.params.id },
       {
         name: name,
@@ -102,6 +156,7 @@ module.exports = {
       });
   },
 
+ 
   findAllInstructors: (req, res) => {
     InstructorModel.find({})
       .then((allInstructors) => res.status(200).json(allInstructors))

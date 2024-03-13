@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./InstructorDashboard.css";
 import CourseTableInstructor from "../../components/CourseTableInstructor/CourseTableInstructor";
+import UpdatePageInstructorPassword from "../UpdatePageInstructorPassword/UpdatePageInstructorPassword";
 
 
 
@@ -139,12 +140,10 @@ const InstructorDashboard = () => {
     this.classList.add("terra");
     navigation.classList.remove("active");
     main.classList.remove("active");
-    if (this.classList.contains("ins")) {
-      setDisplay("instructors");
-    } else if (this.classList.contains("stud")) {
-      setDisplay("students");
-    } else if (this.classList.contains("crs")) {
+    if (this.classList.contains("crs")) {
       setDisplay("courses");
+    } else if (this.classList.contains("sett")) {
+      setDisplay("settings");
     } else {
       console.log("end");
     }
@@ -173,6 +172,14 @@ const InstructorDashboard = () => {
                   <ion-icon name="home-outline"></ion-icon>
                 </span>
                 <span class="title">Manage Courses</span>
+              </Link>
+            </li>
+            <li className="sett">
+              <Link to="">
+                <span class="icon">
+                  <ion-icon name="settings-outline"></ion-icon>
+                </span>
+                <span class="title">Settings</span>
               </Link>
             </li>
             <li>
@@ -211,15 +218,31 @@ const InstructorDashboard = () => {
           <div class="details">
             <div class="recentOrders">
               <div class="cardHeader">
-                <h2>Recent Courses</h2>
-                <Link className="blue-color" to="/courses/new">
-                  +Add
-                </Link>
+              {display === "courses" ? (
+                  <>
+                    <h2>Recent Courses</h2>
+                    <Link className="blue-color" to="/courses/new">
+                      +Add
+                    </Link>
+                  </>
+                ) : display === "settings" ? (
+                  <>
+                    <h2 className="pl-x">Change Password</h2>
+                    {/* <Link class="blue-color" to={"/instructors/edit/password/"+userObjsId}>
+                      Change Password
+                    </Link> */}
+                  </>
+                )  : null}
               </div>
-              <CourseTableInstructor
-                allCourses={allCourses}
-                deleteCourse={deleteCourse}
-              />
+              {display === "courses" ? (
+                <CourseTableInstructor
+                  allCourses={allCourses}
+                  deleteCourse={deleteCourse}
+                />
+              ) : null}
+              {display === "settings" ? (
+                <UpdatePageInstructorPassword />
+              ) : null}
             </div>
           </div>
         </div>

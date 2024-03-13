@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import './UpdatePageInsructor.css';
+import './UpdatePageInstructorPassword.css';
 
 
-const UpdatePageInsructor = (props)=>{
-    const { id } = useParams();
+const UpdatePageInstructorPassword = (props)=>{
+    const userObjs = JSON.parse(localStorage.getItem("USER_OBJ")) || {};
+    const id = userObjs._id
+
     const [confirmReg, setConfirmReg] = useState("");
-    const [errs, setErrs] = useState({});
-    const navigate = useNavigate();
+    const [errs2, setErrs2] = useState('');
     const [loaded, setLoaded] = useState(false); 
     const [user, setUser] = useState({
+      id: id,
       name: "",
       email: "",
       isInstructor: "false",
@@ -27,16 +28,17 @@ const UpdatePageInsructor = (props)=>{
     }
     
 
-    //get  data one specific instructor
+  //  get  data one specific instructor
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/instructors/" + id,{withCredentials: true})
       .then((res) => {
         console.log("u++++++++++",res.data.oneSingleInstructor);
         setUser({
-          name: res.data.oneSingleInstructor.name,
-          email: res.data.oneSingleInstructor.email,
-          isInstructor: res.data.oneSingleInstructor.isInstructor,
+           id: id,
+           name: res.data.oneSingleInstructor.name,
+           email: res.data.oneSingleInstructor.email,
+           isInstructor: res.data.oneSingleInstructor.isInstructor,
           password: "default",
           confirmPassword: "default"
         });
@@ -49,7 +51,7 @@ const UpdatePageInsructor = (props)=>{
 
     const updateInstructor = (e) =>{
       e.preventDefault();
-      axios.patch('http://localhost:8000/api/instructors/'+ id,
+      axios.patch('http://localhost:8000/api/instructors/password/'+ id,
       user,
       {
         withCredentials: true,
@@ -57,20 +59,17 @@ const UpdatePageInsructor = (props)=>{
       .then(res =>{
         console.log(res.data);
         setUser({
-          name:"",
-          email:"",
-          isInstructor:"false",
-          password:"",
-          confirmPassword:""
-        })
+          ...user, 
+          password: "", 
+          confirmPassword: "" 
+        });
+        setErrs2("");
         setConfirmReg("Thank you for registering, you can now log in");
-        setErrs({});
-        navigate("/admin-dashboard");
       })
       .catch((err)=>{
-      //  console.log(err);
-        setErrs(err.response.data.errors.errors);
-        console.log("+++++++++",err.response.data.errors.errors);
+        console.log(err);
+        setErrs2(err.response.data.message);
+        console.log("+++++++++",err.response.data.message);
       })
     };
 
@@ -88,51 +87,20 @@ const UpdatePageInsructor = (props)=>{
   
    
   return(
-    <div className="UpdatePageInsructor">
-       <div className="page-top">
-        <h2>update instuctor</h2>
-        <Link to="/admin-dashboard">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>back to Home
-        </Link>
-      </div>
+    <div className="UpdatePageInstructorPassword">
       {
         confirmReg?
         <h1 style={{color: "grey"}}>{confirmReg}</h1>
         :null
       }
+      {
+        errs2?
+        <span className="error-text">{errs2}</span>
+        :null
+      }
       {loaded === true ? 
       <form onSubmit={updateInstructor}>
         <div className="field">
-          <label>name</label>
-          {
-            errs.name?
-            <span className="error-text">{errs.name.message}</span>
-            :null
-          }
-          <input type="text" name="name" value={user.name} onChange={(e)=> handleChange(e)}/>
-        </div>
-        <div className="field">
-          <label>Email</label>
-          {
-            errs.email?
-            <span className="error-text">{errs.email.message}</span>
-            :null
-          }
-          <input type="email" name="email" value={user.email} onChange={(e)=> handleChange(e)}/>
-        </div>
-        <div className="field">
-          <label>isInstructor</label>
-          {
-            errs.isInstructor?
-            <span className="error-text">{errs.isInstructor.message}</span>
-            :null
-          }
-          <select name="isInstructor" id="" value={user.isInstructor} onChange = {(e)=>handleChange(e)}>
-               <option value="false">false</option>
-               <option value="true">true</option>
-          </select>
-        </div>
-        {/* <div className="field">
           <label>Password</label>
           {
             errs.password?
@@ -156,12 +124,12 @@ const UpdatePageInsructor = (props)=>{
             <input type="text" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
             <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye  absolute"></i>
           </div>
-        </div> */}
+        </div>
         <button type="submit">Update</button>
       </form>  : null }
     </div>
   );
   };
   
-  export default UpdatePageInsructor;
+  export default UpdatePageInstructorPassword;
 

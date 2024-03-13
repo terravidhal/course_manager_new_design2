@@ -232,7 +232,7 @@
 .InstructorDashboard .details .cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 .InstructorDashboard .cardHeader h2 {
   font-weight: 600;
@@ -313,6 +313,9 @@
   font-weight: 500;
   border: none;
   width: 64px;
+}
+.InstructorDashboard .pl-x {
+ padding-left: 67px;
 }
 
 @media (max-width: 991px) {

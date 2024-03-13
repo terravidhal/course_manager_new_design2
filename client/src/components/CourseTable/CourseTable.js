@@ -2,6 +2,9 @@ import React from "react";
 import "./CourseTable.css";
 import { Link } from "react-router-dom";
 
+
+
+
  
 const CourseTable = (props) => {
   const userObjs = JSON.parse(localStorage.getItem('USER_OBJ')) || {};
@@ -19,7 +22,7 @@ const CourseTable = (props) => {
 
   return (
     <div className="CourseTable">
-      <table>
+       <table>
          <thead>
           <tr>
             <th className="text-left">Name of Course</th>
@@ -77,7 +80,7 @@ const CourseTable = (props) => {
             );
           })} 
         </tbody>
-      </table>
+      </table> 
      </div>
      
   );

@@ -29,7 +29,7 @@
 
 .UpdatePageInsructor form {
   padding: 20px;
-  min-height: 450px;
+  min-height: 320px;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -118,6 +118,10 @@
   font-size: 0.8rem;
   color: gray;
   font-style: italic;
+}
+.UpdatePageInsructor .form-password {
+ margin-top: 10px;
+ min-height: 280px!important;
 }
 
 @media (max-width: 991px) {

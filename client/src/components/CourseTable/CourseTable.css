@@ -1,4 +1,4 @@
-.text-left {
+ .text-left {
   text-align: left;
 }
 .text-center {
@@ -16,4 +16,5 @@
 }
 .CourseTable td.options a button {
   border: none;
-}
+} 
+

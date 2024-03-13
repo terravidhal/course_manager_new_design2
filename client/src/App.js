@@ -53,7 +53,7 @@ function App() {
     <div className="App">
        <BrowserRouter>
          <Routes>
-           { userObjRole === 'admin' ?
+           {/* { userObjRole === 'admin' ?
               <>
                <Route path="/register_instructor" element={<Navigate replace to="/admin-dashboard" />} />
                <Route path="/register_student" element={<Navigate replace to="/admin-dashboard" />} />
@@ -118,7 +118,7 @@ function App() {
                  : null
                 
                : null
-              }
+              } */}
            <Route path="/" element={<Navigate replace to="/home"  />} />  {/* redirection */}
            <Route path="/home" element={<HomeHome />} />
            <Route path="/register_instructor" element={<RegisterInstructor />} />
