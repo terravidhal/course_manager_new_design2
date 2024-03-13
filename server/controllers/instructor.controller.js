@@ -69,15 +69,14 @@ module.exports = {
   },
 
   updateExistingInstructor: async (req, res) => {
-    const { id, name, email, isInstructor, password } = req.body;
+    const { id, name, email, isInstructor } = req.body;
 
     InstructorModel.findOneAndUpdate(
-      { _id: id },
+      { _id: req.params.id },
       {
         name: name,
         email: email,
         isInstructor: isInstructor,
-      //  password: await bcrypt.hash(password, 10),
       },
       { new: true, runValidators: true }
     )
@@ -126,7 +125,7 @@ module.exports = {
     }
 
     InstructorModel.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: id },
       {
         name: name,
         email: email,

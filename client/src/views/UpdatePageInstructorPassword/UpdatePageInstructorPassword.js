@@ -64,7 +64,7 @@ const UpdatePageInstructorPassword = (props)=>{
           confirmPassword: "" 
         });
         setErrs2("");
-        setConfirmReg("Thank you for registering, you can now log in");
+        setConfirmReg("succefully, change your password!!!");
       })
       .catch((err)=>{
         console.log(err);
@@ -90,7 +90,7 @@ const UpdatePageInstructorPassword = (props)=>{
     <div className="UpdatePageInstructorPassword">
       {
         confirmReg?
-        <h1 style={{color: "grey"}}>{confirmReg}</h1>
+        <h2 style={{color: "grey", paddingLeft:"17px"}}>{confirmReg}</h2>
         :null
       }
       {
@@ -102,11 +102,6 @@ const UpdatePageInstructorPassword = (props)=>{
       <form onSubmit={updateInstructor}>
         <div className="field">
           <label>Password</label>
-          {
-            errs.password?
-            <span className="error-text">{errs.password.message}</span>
-            :null
-          }
           <div className="input-icon relative">
             <input type="text" name="password" value={user.password} onChange={(e)=> handleChange(e)}/>
             <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye  absolute"></i>
@@ -115,11 +110,6 @@ const UpdatePageInstructorPassword = (props)=>{
         </div>
         <div className="field">
           <label>Confirm Password</label>
-          {
-            errs.confirmPassword?
-            <span className="error-text">{errs.confirmPassword.message}</span>
-            :null
-          }
           <div className="input-icon relative">
             <input type="text" name="confirmPassword" value={user.confirmPassword} onChange={(e)=> handleChange(e)}/>
             <i onClick={(ev)=> toggleInputType(ev)} className="fas fa-eye  absolute"></i>
