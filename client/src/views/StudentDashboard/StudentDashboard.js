@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./StudentDashboard.css";
 import CourseTableStudent from "../../components/CourseTableStudent/CourseTableStudent";
+import UpdateStudentPassword from "../UpdateStudentPassword/UpdateStudentPassword";
 
 
 
@@ -96,7 +97,6 @@ const StudentDashboard = () => {
     axios
       .post("http://localhost:8000/api/logout", {}, { withCredentials: true })
       .then((res) => {
-        //console.log("res", res);
         console.log("deconnexion", res.data.message);
         localStorage.removeItem("USER_OBJ");
         navigate("/login_page");
@@ -126,12 +126,10 @@ const StudentDashboard = () => {
     this.classList.add("terra");
     navigation.classList.remove("active");
     main.classList.remove("active");
-    if (this.classList.contains("ins")) {
-      setDisplay("instructors");
-    } else if (this.classList.contains("stud")) {
-      setDisplay("students");
-    } else if (this.classList.contains("crs")) {
+    if (this.classList.contains("crs")) {
       setDisplay("courses");
+    } else if (this.classList.contains("sett")) {
+      setDisplay("settings");
     } else {
       console.log("end");
     }
@@ -160,6 +158,14 @@ const StudentDashboard = () => {
                   <ion-icon name="home-outline"></ion-icon>
                 </span>
                 <span class="title">View Courses</span>
+              </Link>
+            </li>
+            <li className="sett">
+              <Link to="">
+                <span class="icon">
+                  <ion-icon name="settings-outline"></ion-icon>
+                </span>
+                <span class="title">Settings</span>
               </Link>
             </li>
             <li>
@@ -198,9 +204,22 @@ const StudentDashboard = () => {
           <div class="details">
             <div class="recentOrders">
               <div class="cardHeader">
-                <h2>Recent Courses</h2>
+                {display === "courses" ? (
+                  <>
+                    <h2>Recent Courses</h2>
+                  </>
+                ) : display === "settings" ? (
+                  <>
+                    <h2 className="pl-x">Change Password</h2>
+                  </>
+                )  : null}
               </div>
-              <CourseTableStudent allCourses={allCourses} />
+              {display === "courses" ? (
+                <CourseTableStudent allCourses={allCourses} />
+              ) : null}
+              {display === "settings" ? (
+                <UpdateStudentPassword/>
+              ) : null}
             </div>
           </div>
         </div>

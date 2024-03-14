@@ -101,7 +101,7 @@ const InstructorDashboard = () => {
       })
       .then((res) => {
         console.log(res.data.result);
-        setAllCourses(allCourses.filter((course) => course._id !== courseId)); // pas necessaire
+        setAllCourses(allCourses.filter((course) => course._id !== courseId)); 
       })
       .catch((err) => console.log(err));
   };
@@ -194,7 +194,7 @@ const InstructorDashboard = () => {
             </li>
           </ul>
         </div>
-        <div class="main  relative">
+        <div class="main relative">
           <div class="topbar">
             <div class="toggle">
               <ion-icon name="menu-outline"></ion-icon>
@@ -228,9 +228,6 @@ const InstructorDashboard = () => {
                 ) : display === "settings" ? (
                   <>
                     <h2 className="pl-x">Change Password</h2>
-                    {/* <Link class="blue-color" to={"/instructors/edit/password/"+userObjsId}>
-                      Change Password
-                    </Link> */}
                   </>
                 )  : null}
               </div>

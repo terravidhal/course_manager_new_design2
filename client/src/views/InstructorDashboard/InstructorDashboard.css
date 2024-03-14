@@ -227,6 +227,8 @@
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   grid-template-rows: 1fr 16fr;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .InstructorDashboard .details .cardHeader {

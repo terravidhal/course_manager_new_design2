@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import StudentTable from "../../components/StudentTable/StudentTable";
 import InstructorTable from "../../components/InstructorTable/InstructorTable";
+import UpdateAdminPassword from "../UpdateAdminPassword/UpdateAdminPassword";
 
 const AdminDashboard = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -208,6 +209,8 @@ const AdminDashboard = () => {
       setDisplay("students");
     } else if (this.classList.contains("crs")) {
       setDisplay("courses");
+    } else if (this.classList.contains("sett")) {
+      setDisplay("settings");
     } else {
       console.log("end");
     }
@@ -252,6 +255,14 @@ const AdminDashboard = () => {
                   <ion-icon name="people-circle-outline"></ion-icon>
                 </span>
                 <span class="title">Manage Students</span>
+              </Link>
+            </li>
+            <li className="sett">
+              <Link to="">
+                <span class="icon">
+                  <ion-icon name="settings-outline"></ion-icon>
+                </span>
+                <span class="title">Settings</span>
               </Link>
             </li>
             <li>
@@ -329,7 +340,11 @@ const AdminDashboard = () => {
                       +Add
                     </Link>
                   </>
-                ) : null}
+                ) : display === "settings" ? (
+                  <>
+                    <h2 className="pl-x">Change Password</h2>
+                  </>
+                )  : null}
               </div>
               {display === "courses" ? (
                 <CourseTable
@@ -348,6 +363,9 @@ const AdminDashboard = () => {
                   allInstructors={allInstructors}
                   deleteInstructor={deleteInstructor}
                 />
+              ) : null}
+              {display === "settings" ? (
+                <UpdateAdminPassword />
               ) : null}
             </div>
           </div>

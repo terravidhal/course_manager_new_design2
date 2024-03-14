@@ -5,6 +5,7 @@ const {
     findOneSingleStudent,
     deleteOneSpecificStudent,
     updateExistingStudent,
+    updateExistingStudentPassword,
   } = require("../controllers/student.controller");
 
   const { authenticate } = require('../config/jwt.config');
@@ -17,6 +18,7 @@ const {
       app.get("/api/students",authenticate, checkPermissions('admin', 'instructor'), findAllStudents);
       app.get('/api/students/:id',authenticate, checkPermissions('admin'), findOneSingleStudent);
       app.patch("/api/students/:id",authenticate, checkPermissions('admin'), updateExistingStudent);
+      app.patch("/api/students/password/:id",authenticate, checkPermissions('student'), updateExistingStudentPassword);
       app.delete("/api/students/:id",authenticate, checkPermissions('admin'),  deleteOneSpecificStudent);
   }
   

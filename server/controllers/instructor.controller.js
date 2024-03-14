@@ -104,7 +104,7 @@ module.exports = {
 
 
   updateExistingInstructorPassword: async (req, res) => {
-    const { id, name, email, isInstructor, password, confirmPassword } = req.body;
+    const { id, password, confirmPassword } = req.body;
 
     // Check if password update is requested
     if (password) {
@@ -127,9 +127,6 @@ module.exports = {
     InstructorModel.findOneAndUpdate(
       { _id: id },
       {
-      //  name: name,
-      //  email: email,
-       // isInstructor: isInstructor,
         password: await bcrypt.hash(password, 10),
       },
       { new: true, runValidators: true }
