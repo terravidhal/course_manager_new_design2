@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AdminDashboard.css";
 import CourseTable from "../../components/CourseTable/CourseTable";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import StudentTable from "../../components/StudentTable/StudentTable";
 import InstructorTable from "../../components/InstructorTable/InstructorTable";
 import UpdateAdminPassword from "../UpdateAdminPassword/UpdateAdminPassword";
@@ -16,6 +16,8 @@ const AdminDashboard = () => {
   const [allInstructors, setAllInstructors] = useState([]);
   const [display, setDisplay] = useState("courses");
   const navigate = useNavigate();
+  const location = useLocation();
+ 
 
   const userObjs = JSON.parse(localStorage.getItem("USER_OBJ")) || {};
   const userObjsRole = userObjs.role || "default";
@@ -23,6 +25,16 @@ const AdminDashboard = () => {
 
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
+
+
+  useEffect(() => {
+    if (userObjsRole !== 'admin') {
+     // const previousUrl = location.pathname;
+    //  localStorage.setItem('previousUrl', previousUrl);
+      navigate('/page404NotFound'); 
+    }
+  }, []);
+
 
   // check and update courses status
   useEffect(() => {

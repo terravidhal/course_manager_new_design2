@@ -18,9 +18,18 @@ const InstructorDashboard = () => {
   const userObjs = JSON.parse(localStorage.getItem("USER_OBJ")) || {};
   const userObjsRole = userObjs.role || "default";
   const userObjsId = userObjs._id || "default";
+  const userObjsIsInstructor = userObjs.isInstructor || "default";
 
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
+  console.log("userObjs.isInstructor+++++++++", userObjs.isInstructor);
+
+
+  useEffect(() => {
+    if (userObjsRole !== 'instructor' || userObjsIsInstructor === 'false') {
+           navigate('/page404NotFound'); 
+    }
+  }, []);
 
   // check and update courses status
   useEffect(() => {

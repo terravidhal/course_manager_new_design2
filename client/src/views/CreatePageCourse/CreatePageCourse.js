@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreatePageCourse.css";
 import CourseForm from "../../components/CourseForm/CourseForm";
 import axios from "axios";
@@ -17,6 +17,13 @@ const CreatePageCourse = () => {
   const [errors, setErrors] = useState({});
   const [errors2, setErrors2] = useState({});
   const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    if (userObjsRole !== 'admin') {
+      navigate('/page404NotFound'); 
+    }
+  }, []);
 
   // create one course
   const createCourse = (coursObj) => {

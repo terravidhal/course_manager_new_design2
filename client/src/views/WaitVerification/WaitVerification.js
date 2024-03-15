@@ -15,7 +15,7 @@ const WaitVerification = () => {
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
 
- 
+  
   const logout = (event) =>{
     event.preventDefault();
     axios.post('http://localhost:8000/api/logout',{},{withCredentials: true})

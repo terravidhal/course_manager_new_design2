@@ -16,6 +16,11 @@ const UpdatePageCourse = (props) => {
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
 
+  useEffect(() => {
+    if (userObjsRole !== 'admin' ) {
+           navigate('/page404NotFound'); 
+    }
+  }, []);
 
 
   const { id } = useParams();

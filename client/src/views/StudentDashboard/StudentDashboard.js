@@ -21,6 +21,12 @@ const StudentDashboard = () => {
   console.log("userObjRole+++++++++", userObjsRole);
   console.log("userObjsId+++++++++", userObjsId);
 
+  useEffect(() => {
+    if (userObjsRole !== 'student' ) {
+           navigate('/page404NotFound'); 
+    }
+  }, []);
+
   // check and update courses status
   useEffect(() => {
     const GetAllCoursesByStudent = async () => {

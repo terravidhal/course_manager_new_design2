@@ -20,6 +20,20 @@ const UpdatePageStudent = (props) => {
   const [confirmReg, setConfirmReg] = useState("");
   const [errs, setErrs] = useState({});
 
+
+  const userObjs = JSON.parse(localStorage.getItem('USER_OBJ')) || {};
+  const userObjsRole = userObjs.role || 'default';
+  const userObjsId = userObjs._id || 'default';
+  
+  console.log("userObjRole+++++++++", userObjsRole);
+  console.log("userObjsId+++++++++", userObjsId);
+
+  useEffect(() => {
+    if (userObjsRole !== 'admin' ) {
+           navigate('/page404NotFound'); 
+    }
+  }, []);
+
   //get  data one specific student
   useEffect(() => {
     axios

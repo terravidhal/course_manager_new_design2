@@ -8,6 +8,15 @@ const AdminModel = require("../models/admin.model");
 
 module.exports = {
   authenticate: (req, res, next) => {
+    const currentUrl = req.headers.host + req.url;
+    if (!req.cookies.usertoken) {
+      return res.status(401).json({
+        verified: false,
+        message: "No token provided.",
+        currentUrl: currentUrl,
+      });
+    }
+
     jwt.verify(
       req.cookies.usertoken,
       process.env.JWT_SECRET,
@@ -18,7 +27,7 @@ module.exports = {
           _id: decodedToken._id,
         });
         console.log(" decodedToken._id", decodedToken._id);
-        if (err) { // essaye de formater le code et de 'catch' l'erreur
+        if (err) { 
           res
             .status(401)
             .json({
@@ -44,6 +53,10 @@ module.exports = {
             next();
           } else {
             console.log("null");
+            res.status(401).json({
+              verified: false,
+              message: "Unauthorized access.",
+            });
           }
         }
       }

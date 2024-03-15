@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './CreatePageStudent.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,7 +17,20 @@ const CreatePageStudent = (props)=>{
       levelStudent: 1,
       password: "",
       confirmPassword:""
-    })
+    });
+
+    const userObjs = JSON.parse(localStorage.getItem("USER_OBJ")) || {};
+    const userObjsRole = userObjs.role || "default";
+    const userObjsId = userObjs._id || "default";
+  
+    console.log("userObjRole+++++++++", userObjsRole);
+    console.log("userObjsId+++++++++", userObjsId);
+
+    useEffect(() => {
+      if (userObjsRole !== 'admin') {
+        navigate('/page404NotFound'); 
+      }
+    }, []);
   
     const handleChange = (e)=>{
       setUser({
