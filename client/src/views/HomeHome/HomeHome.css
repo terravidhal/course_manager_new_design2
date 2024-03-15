@@ -135,4 +135,25 @@
   .HomeHome .header.top-1 .social-icons {
     display: none;
   }
+ 
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+  .HomeHome .card-1 {
+    left: 30px;
+  }
+  .HomeHome .header.top-1 {
+    padding-left: 30px;
+  }
+  .HomeHome .header.top-2 ul {
+    display: block;
+  }
+  .HomeHome .header.top-2 ul li {
+    padding-top: 0;
+    padding-bottom: 0.8rem;
+  }
 }

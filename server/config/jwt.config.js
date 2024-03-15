@@ -18,7 +18,7 @@ module.exports = {
           _id: decodedToken._id,
         });
         console.log(" decodedToken._id", decodedToken._id);
-        if (err) {
+        if (err) { // essaye de formater le code et de 'catch' l'erreur
           res
             .status(401)
             .json({

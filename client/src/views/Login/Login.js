@@ -49,6 +49,7 @@ const Login = (props)=>{
           navigate("/admin-dashboard");
         }
         else{
+          navigate("/page404NotFound");
           console.error("Unexpected response:", res.data);
         }   
       })

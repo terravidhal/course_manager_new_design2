@@ -93,6 +93,38 @@ module.exports = {
       });
   },
 
+  updateStudentNameandEmail: async (req, res) => {
+    const { id, name, email } = req.body;
+
+    StudentModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        name: name,
+        email: email,
+      },
+      { new: true, runValidators: true }
+    )
+      .then((updatedStudent) => {
+        if (!updatedStudent) {
+          return res.status(404).json({ message: "Étudiant introuvable" });
+        }
+        res.status(200).json({
+          message: "Étudiant mis à jour avec succès",
+          student: updatedStudent,
+        });
+      })
+      .catch((err) => {
+        if (err.name === "ValidationError") {
+          return res
+            .status(400)
+            .json({ message: "Validation Errors", errors: err });
+        }
+        res
+          .status(400)
+          .json({ message: "Une erreur s'est produite", errors: err });
+      });
+  },
+
   updateExistingStudentPassword: async (req, res) => {
     const {  id, password, confirmPassword } = req.body;
 

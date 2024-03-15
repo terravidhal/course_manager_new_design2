@@ -33,6 +33,9 @@ body {
 .relative {
   position: relative;
 }
+.absolute {
+  position: absolute;
+}
 .orange-color {
   font-weight: bold;
   color: var(--white);
@@ -83,6 +86,9 @@ body {
 .AdminDashboard .navigation ul li:nth-child(1) {
   margin-bottom: 40px;
   pointer-events: none;
+  font-style: italic;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 100 !important;
 }
 
 .AdminDashboard .navigation ul li a {
@@ -275,7 +281,7 @@ body {
 .AdminDashboard .details .cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 .AdminDashboard .cardHeader h2 {
   font-weight: 600;
@@ -360,6 +366,7 @@ body {
 .AdminDashboard .pl-x {
   padding-left: 67px;
  }
+
 
 @media (max-width: 991px) {
   .AdminDashboard .navigation {

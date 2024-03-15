@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./InstructorDashboard.css";
 import CourseTableInstructor from "../../components/CourseTableInstructor/CourseTableInstructor";
 import UpdatePageInstructorPassword from "../UpdatePageInstructorPassword/UpdatePageInstructorPassword";
+import ProfilPopup from "../../components/profilPopup/profilPopup";
+import ProfilPage from "../profilPage/profilPage";
 
 
 
@@ -124,6 +126,8 @@ const InstructorDashboard = () => {
   let toggle = document.querySelector(".toggle") || {};
   let navigation = document.querySelector(".navigation");
   let main = document.querySelector(".main");
+   //popup profil
+   const popupProfil = document.querySelector(".InstructorDashboard .profilPopup");
 
   toggle.onclick = function () {
     navigation.classList.toggle("active");
@@ -131,7 +135,7 @@ const InstructorDashboard = () => {
   };
 
   // add hovered class to selected list item
-  let list = document.querySelectorAll(".navigation li");
+  let list = document.querySelectorAll(".InstructorDashboard li");
 
   function activeLink() {
     list.forEach((item) => {
@@ -140,16 +144,26 @@ const InstructorDashboard = () => {
     this.classList.add("terra");
     navigation.classList.remove("active");
     main.classList.remove("active");
+    popupProfil.classList.remove('show');
+
     if (this.classList.contains("crs")) {
       setDisplay("courses");
     } else if (this.classList.contains("sett")) {
       setDisplay("settings");
+    } else if (this.classList.contains("profi")) {
+      setDisplay("profile");
     } else {
       console.log("end");
     }
   }
 
   list.forEach((item) => item.addEventListener("click", activeLink));
+
+  const displayProfil = () => {
+    const popup = document.querySelector(".InstructorDashboard .profilPopup");
+   // console.log(popup);
+    popup.classList.toggle('show');
+  }
 
   return (
     <div className="InstructorDashboard">
@@ -195,13 +209,14 @@ const InstructorDashboard = () => {
           </ul>
         </div>
         <div class="main relative">
-          <div class="topbar">
+          <div class="topbar relative">
             <div class="toggle">
               <ion-icon name="menu-outline"></ion-icon>
             </div>
-            <div class="user">
-              <img src="/assets/images/utilisateur.png" alt="" />
+            <div class="user" onClick={displayProfil}>
+               <img src="/assets/images/pic-1.jpg" alt="" />
             </div>
+             <ProfilPopup />
           </div>
           <div class="cardBox">
             <div class="card">
@@ -229,6 +244,13 @@ const InstructorDashboard = () => {
                   <>
                     <h2 className="pl-x">Change Password</h2>
                   </>
+                )  :  display === "profile" ? (
+                  <>
+                    <h2 className="pl-x">Profile</h2>
+                    <h2 class="blue-color" to="/instructors/new">
+                      Update Profile
+                    </h2>
+                  </>
                 )  : null}
               </div>
               {display === "courses" ? (
@@ -239,6 +261,9 @@ const InstructorDashboard = () => {
               ) : null}
               {display === "settings" ? (
                 <UpdatePageInstructorPassword />
+              ) : null}
+              {display === "profile" ? (
+                <ProfilPage setDisplay={setDisplay} url="instructors"/>
               ) : null}
             </div>
           </div>

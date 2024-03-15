@@ -30,6 +30,7 @@ import RegisterAdmin from "./views/RegisterAdmin/RegisterAdmin";
 import RegisterInstructor from "./views/RegisterInstructor/RegisterInstructor";
 import UpdatePageCourse from "./views/UpdatePageCourse/UpdatePageCourse";
 import HomeHome from "./views/HomeHome/HomeHome";
+import Page404NotFound from "./views/page404NotFound/page404NotFound";
 
 
 
@@ -140,6 +141,8 @@ function App() {
            <Route path="/students/:id" element={<DetailsPageStudent />}/>
            <Route path="/instructors/:id" element={<DetailsPageInsructor />}/>
            <Route path="/route/regist/loaded25" element={<RegisterAdmin />}/>
+           <Route path="*" element={<Page404NotFound />}/>
+           <Route path="/page404NotFound" element={<Page404NotFound />}/>
          </Routes>
        </BrowserRouter>
     </div>

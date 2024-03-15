@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import StudentTable from "../../components/StudentTable/StudentTable";
 import InstructorTable from "../../components/InstructorTable/InstructorTable";
 import UpdateAdminPassword from "../UpdateAdminPassword/UpdateAdminPassword";
+import ProfilPopup from "../../components/profilPopup/profilPopup";
+import ProfilPage from "../profilPage/profilPage";
+
 
 const AdminDashboard = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -36,6 +39,7 @@ const AdminDashboard = () => {
         setAllCourses(updatedCourses);
       } catch (err) {
         console.error(err);
+        //navigate("/page404NotFound");
       }
     };
 
@@ -187,6 +191,8 @@ const AdminDashboard = () => {
   let toggle = document.querySelector(".toggle") || {};
   let navigation = document.querySelector(".navigation");
   let main = document.querySelector(".main");
+  //popup profil
+  const popupProfil = document.querySelector(".AdminDashboard .profilPopup");
 
   toggle.onclick = function () {
     navigation.classList.toggle("active");
@@ -194,7 +200,7 @@ const AdminDashboard = () => {
   };
 
   // add hovered class to selected list item
-  let list = document.querySelectorAll(".navigation li");
+  let list = document.querySelectorAll(".AdminDashboard li");
 
   function activeLink() {
     list.forEach((item) => {
@@ -203,6 +209,8 @@ const AdminDashboard = () => {
     this.classList.add("terra");
     navigation.classList.remove("active");
     main.classList.remove("active");
+    popupProfil.classList.remove('show');
+
     if (this.classList.contains("ins")) {
       setDisplay("instructors");
     } else if (this.classList.contains("stud")) {
@@ -211,12 +219,20 @@ const AdminDashboard = () => {
       setDisplay("courses");
     } else if (this.classList.contains("sett")) {
       setDisplay("settings");
-    } else {
+    }  else if (this.classList.contains("profi")) {
+      setDisplay("profile");
+    }else {
       console.log("end");
     }
   }
 
   list.forEach((item) => item.addEventListener("click", activeLink));
+
+  const displayProfil = () => {
+    const popup = document.querySelector(".AdminDashboard .profilPopup");
+   // console.log(popup);
+    popup.classList.toggle('show');
+  }
 
   return (
     <div className="AdminDashboard">
@@ -230,6 +246,7 @@ const AdminDashboard = () => {
                 </span>
                 <span class="title orange-color">
                   welcome{" " + userObjs.name}
+                  {/* Admin Dashboard */}
                 </span>
               </a>
             </li>
@@ -278,13 +295,14 @@ const AdminDashboard = () => {
           </ul>
         </div>
         <div class="main  relative">
-          <div class="topbar">
+          <div class="topbar relative">
             <div class="toggle">
               <ion-icon name="menu-outline"></ion-icon>
             </div>
-            <div class="user">
-              <img src="/assets/images/utilisateur.png" alt="" />
+            <div class="user" onClick={displayProfil}>
+              <img src="/assets/images/pic-1.jpg" alt="" />
             </div>
+              <ProfilPopup />
           </div>
           <div class="cardBox">
             <div class="card">
@@ -344,6 +362,13 @@ const AdminDashboard = () => {
                   <>
                     <h2 className="pl-x">Change Password</h2>
                   </>
+                )  : display === "profile" ? (
+                  <>
+                    <h2 className="pl-x">Profile</h2>
+                    <h2 class="blue-color" to="/instructors/new">
+                      Update Profile
+                    </h2>
+                  </>
                 )  : null}
               </div>
               {display === "courses" ? (
@@ -366,6 +391,9 @@ const AdminDashboard = () => {
               ) : null}
               {display === "settings" ? (
                 <UpdateAdminPassword />
+              ) : null}
+              {display === "profile" ? (
+                <ProfilPage setDisplay={setDisplay} url="admins" />
               ) : null}
             </div>
           </div>

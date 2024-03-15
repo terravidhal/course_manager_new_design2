@@ -69,8 +69,6 @@ const UpdatePageInsructor = (props)=>{
     };
 
    
-
-  
    
   return(
     <div className="UpdatePageInsructor">

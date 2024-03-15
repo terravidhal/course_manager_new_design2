@@ -32,6 +32,50 @@ module.exports = {
       });
   },
 
+  findOneSingleAdmin: (req, res) => {
+    AdminModel.findOne({ _id: req.params.id })
+      .then((oneSingleAdmin) => {
+        console.log("oneSingleAdmin", oneSingleAdmin);
+        res.json({ oneSingleAdmin });
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  },
+
+
+  updateExistingAdmin: async (req, res) => {
+    const { id, name, email } = req.body;
+
+    AdminModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        name: name,
+        email: email,
+      },
+      { new: true, runValidators: true }
+    )
+      .then((updatedAdmin) => {
+        if (!updatedAdmin) {
+          return res.status(404).json({ message: "admin introuvable" });
+        }
+        res.status(200).json({
+          message: "admin mis à jour avec succès",
+          admin: updatedAdmin,
+        });
+      })
+      .catch((err) => {
+        if (err.name === "ValidationError") {
+          return res
+            .status(400)
+            .json({ message: "Validation Errors", errors: err });
+        }
+        res
+          .status(400)
+          .json({ message: "Une erreur s'est produite", errors: err });
+      });
+  },
+
   updateExistingAdminPassword: async (req, res) => {
     const { id, password, confirmPassword } = req.body;
 
